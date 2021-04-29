@@ -4,13 +4,13 @@ createdb nyc-taxi-data
 
 psql nyc-taxi-data -f setup_files/create_nyc_taxi_schema.sql
 
-shp2pgsql -s 2263:4326 -I shapefiles/taxi_zones/taxi_zones.shp | psql -d nyc-taxi-data
-psql nyc-taxi-data -c "CREATE INDEX ON taxi_zones (locationid);"
+shp2pgsql -a -s 2263:4326 -I shapefiles/taxi_zones/taxi_zones.shp | psql -d nyc-taxi-data
+
 psql nyc-taxi-data -c "VACUUM ANALYZE taxi_zones;"
 
-shp2pgsql -s 2263:4326 -I shapefiles/nyct2010_15b/nyct2010.shp | psql -d nyc-taxi-data
+shp2pgsql -a -s 2263:4326 -I shapefiles/nyct2010_15b/nyct2010.shp | psql -d nyc-taxi-data
 psql nyc-taxi-data -f setup_files/add_newark_airport.sql
-psql nyc-taxi-data -c "CREATE INDEX ON nyct2010 (ntacode);"
+
 psql nyc-taxi-data -c "VACUUM ANALYZE nyct2010;"
 
 psql nyc-taxi-data -f setup_files/add_tract_to_zone_mapping.sql

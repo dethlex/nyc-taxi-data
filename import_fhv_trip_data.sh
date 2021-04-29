@@ -42,4 +42,4 @@ for filename in data/fhvhv_tripdata*.csv; do
   echo "`date`: loaded trips for ${filename}"
 done;
 
-psql nyc-taxi-data -c "CREATE INDEX ON fhv_trips USING BRIN (pickup_datetime) WITH (pages_per_range = 32);"
+#psql nyc-taxi-data -c "CREATE INDEX ON fhv_trips USING BRIN (pickup_datetime) WITH (pages_per_range = 32);"
